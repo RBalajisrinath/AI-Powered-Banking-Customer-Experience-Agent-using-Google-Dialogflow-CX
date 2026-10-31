@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SecureBank Backend",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://securebank-backend-yfnv.onrender.com"
+    }
+  ],
+  "paths": {
+    "/tools/create-application": {
+      "post": {
+        "summary": "Creates application reference",
+        "operationId": "createApplication",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": { "type": "string" },
+                  "customer_name": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Application created successfully"
+          }
+        }
+      }
+    },
+    "/tools/get-contact": {
+      "post": {
+        "summary": "Get bank contact info",
+        "operationId": "getContact",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contact info returned"
+          }
+        }
+      }
+    },
+    "/tools/manager-check": {
+      "post": {
+        "summary": "Check manager availability",
+        "operationId": "checkManager",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Manager availability status"
+          }
+        }
+      }
+    },
+    "/tools/schedule-feedback": {
+      "post": {
+        "summary": "Schedule feedback callback",
+        "operationId": "scheduleFeedback",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer_name": { "type": "string" },
+                  "phone_number": { "type": "string" },
+                  "reason": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Callback scheduled"
+          }
+        }
+      }
+    },
+    "/tools/process-payment": {
+      "post": {
+        "summary": "Process payment",
+        "operationId": "processPayment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "application_ref": { "type": "string" },
+                  "invoice_total": { "type": "number" },
+                  "vendor": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment processed"
+          }
+        }
+      }
+    },
+    "/tools/application-status/{reference}": {
+      "get": {
+        "summary": "Get application status",
+        "operationId": "getApplicationStatus",
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application status"
+          }
+        }
+      }
+    },
+    "/tools/analyze-invoice": {
+      "post": {
+        "summary": "Analyze invoice",
+        "operationId": "analyzeInvoice",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": { "type": "string" },
+                  "total": { "type": "number" },
+                  "currency": { "type": "string" },
+                  "vendor": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Invoice analyzed"
+          }
+        }
+      }
+    }
+  }
+}
